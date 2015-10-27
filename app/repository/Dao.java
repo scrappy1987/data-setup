@@ -31,7 +31,9 @@ public class Dao {
         PropsReader props = new PropsReader(ConfigFactory.load().getString("sql.scripts"));
         String sqlFileLocation = props.getSqlFileLocation(id);
         try {
+            logger.info("executing query Dao sqlFileLocation: " + sqlFileLocation);
             sqlString = sqlReader.readSQLfile(sqlFileLocation);
+            logger.info("executing query Dao sqlString: " + sqlString);
         } catch (Exception e) {
             return "You have encountered a problem -> You most likely have input an invalid script id";
         }

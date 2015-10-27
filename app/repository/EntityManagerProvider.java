@@ -16,14 +16,12 @@ public class EntityManagerProvider
 
         try
         {
-            logger.info("Getting Entity manager ");
             em = JPA.em();
         }
         catch (Throwable t)
         {
-            logger.info("Error creating Entity manager " + t.getMessage());
+            throw t;
         }
-        logger.info("Returning Entity Manager " + em);
         return em;
     }
 }

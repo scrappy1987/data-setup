@@ -25,7 +25,9 @@ public class SQLExecutionController extends Controller {
     @Transactional
     public Result execute(Long id)
     {
+        logger.info("executing script SQLExecutionController id: " + id);
         String returnValue = dao.executeQuery(id);
+        logger.info("executed script SQLExecutionController return value: " + returnValue);
         return ok(returnValue);
     }
 
