@@ -1,14 +1,11 @@
 package repository;
 
-import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import play.Logger;
-import play.api.Play;
-import util.PropsReader;
-import util.SQLReader;
+import util.PropsReaderUtility;
+import util.FileReaderUtility;
 
 import javax.inject.Inject;
-import java.io.IOException;
 
 /**
  * Created by a585493 on 26/10/2015.
@@ -17,10 +14,10 @@ public class Dao {
 
     private static final Logger.ALogger logger = Logger.of(Dao.class);
     private EntityManagerProvider emp;
-    private SQLReader sqlReader;
+    private FileReaderUtility sqlReader;
 
     @Inject
-    public Dao(EntityManagerProvider emp, SQLReader sqlReader){
+    public Dao(EntityManagerProvider emp, FileReaderUtility sqlReader){
         this.emp = emp;
         this.sqlReader = sqlReader;
     }
@@ -28,11 +25,11 @@ public class Dao {
     public final String executeQuery(Long id)
     {
         String sqlString = null;
-        PropsReader props = new PropsReader(ConfigFactory.load().getString("sql.scripts"));
-        String sqlFileLocation = props.getSqlFileLocation(id);
+        PropsReaderUtility props = new PropsReaderUtility(ConfigFactory.load().getString("sql.scripts"));
+        String sqlFileLocation = props.getFileLocation(id);
         try {
             logger.info("executing query Dao sqlFileLocation: " + sqlFileLocation);
-            sqlString = sqlReader.readSQLfile(sqlFileLocation);
+            sqlString = sqlReader.readFile(sqlFileLocation);
             logger.info("executing query Dao sqlString: " + sqlString);
         } catch (Exception e) {
             return "You have encountered a problem -> You most likely have input an invalid script id";

@@ -10,18 +10,18 @@ import java.util.Properties;
 /**
  * Created by a585493 on 26/10/2015.
  */
-public class PropsReader {
+public class PropsReaderUtility {
 
     private final Logger.ALogger logger = Logger.of(this.getClass());
     private Properties props;
     private InputStream input;
 
-    public PropsReader(String propsLocation) {
+    public PropsReaderUtility(String propsLocation) {
         this.props = new Properties();
         loadProperties(propsLocation);
     }
 
-    public String getSqlFileLocation(Long id) {
+    public String getFileLocation(Long id) {
         return props.getProperty(id.toString());
     }
 

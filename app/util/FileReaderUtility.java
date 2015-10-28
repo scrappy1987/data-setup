@@ -9,11 +9,11 @@ import java.io.IOException;
 /**
  * Created by a585493 on 26/10/2015.
  */
-public class SQLReader {
+public class FileReaderUtility {
 
     private final Logger.ALogger logger = Logger.of(this.getClass());
 
-    public String readSQLfile(String fileName) throws IOException {
+    public String readFile(String fileName) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         try {
             StringBuilder sb = new StringBuilder();
